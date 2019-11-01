@@ -1,0 +1,45 @@
+{% extends 'portal/basefluid_app.html' %}
+{% load static %}
+
+
+{% block page_name  %}{{key.store}}{% endblock %}
+{% block content %}
+
+
+<table class='gridtable'>
+    <tr>
+
+        <th></th>
+        <th>姓名</th>
+        <th>手機</th>
+        <!-- <th>門店</th> -->
+        {% if key.show1 %}
+        <th>部門</th>
+        {% endif %}
+
+        <th>職稱</th>
+
+    </tr>
+    {% for x in list1 %}
+    <tr>
+
+        <th>{{forloop.counter}} </th>
+        <td> {{x.name}} </td>
+        <td> {{x.mobile}} </td>
+        <!-- <td> {{x.store}} </td> -->
+        {% if key.show1 %}
+      
+        <td> {{x.dept}} </td>
+        {% endif %}
+
+        <td> {{x.title}} </td>
+    </tr>
+
+    {% endfor %}
+</table>
+
+{% endblock %}
+
+{% block permission %}
+權限：一般登入。
+{% endblock %}

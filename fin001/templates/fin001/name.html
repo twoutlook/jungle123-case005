@@ -1,0 +1,38 @@
+{% extends 'portal/basefluid_app.html' %}
+{% load static %}
+
+
+{% block page_name  %}全部人員手機號碼{% endblock %}
+{% block content %}
+
+註：按姓名編碼排序
+<table class='gridtable'>
+    <tr>
+   
+    <th></th>
+    <th>姓名</th>
+    <th>手機</th>
+    <!-- <th>門店</th> -->
+    <!-- <th>部門</th>
+    <th>職稱</th> -->
+    
+    </tr>
+    {% for x in list1 %}
+    <tr>
+
+        <th>{{forloop.counter}} </th>
+        <td> {{x.name}} </td>
+        <td> {{x.mobile}} </td>
+        <!-- <td> {{x.store}} </td> -->
+        <!-- <td> {{x.dept}} </td>
+        <td> {{x.title}} </td> -->
+     </tr>
+
+    {% endfor %}
+</table>
+
+{% endblock %}
+
+{% block permission %}
+權限：一般登入。
+{% endblock %}

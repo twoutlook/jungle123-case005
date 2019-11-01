@@ -1,0 +1,33 @@
+{% extends 'portal/basefluid_app.html' %}
+{% load static %}
+
+
+{% block page_name  %}門店人員{% endblock %}
+{% block content %}
+
+
+<table class='gridtable'>
+    <tr>
+   
+    <th></th>
+    <th>門店</th>
+    <th>人數</th>
+    
+    </tr>
+    {% for x in list1 %}
+    <tr>
+
+        <th>{{forloop.counter}} </th>
+        <td><a href='{{x.store}}/'> {{x.store}}</a> </td>
+        <td align='right'> {{x.headcnt}} </td>
+        <!-- <td> {{x.title}} </td> -->
+     </tr>
+
+    {% endfor %}
+</table>
+
+{% endblock %}
+
+{% block permission %}
+權限：一般登入。
+{% endblock %}
