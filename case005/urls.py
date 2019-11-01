@@ -4,6 +4,8 @@ app_name = 'case002'
 
 urlpatterns = [
     path('s1/', views.s1, name='s1'),
+    path('rolecnt/', views.rolecnt, name='rolecnt'),
+    path('rolecnt/<date1>/', views.rolecnt_date, name='rolecnt_date'),
     path('headcnt/', views.headcnt, name='headcnt'),
     path('headcnt/<date1>/', views.headcnt_date, name='headcnt_date'),
     path('best/', views.best, name='best'),

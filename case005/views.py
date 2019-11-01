@@ -40,6 +40,36 @@ def headcnt(request):
     context = {'list1': list1}
     return render(request,getHtml('headcnt') , context)
 
+def rolecnt(request):
+    list1 = Data2.objects.exclude(role='---').exclude(role='Absence').values('date1').annotate(headcnt=Count('role',distinct=True))
+    
+
+    # pivot_table = pivot(list1, 'date1', 'member', 'id',aggregation=Count)
+    # for x in pivot_table:
+    #     x['total']=x['Member']+x['Guest']
+  
+    context = {'list1': list1}
+    return render(request,getHtml('rolecnt') , context)
+def rolecnt_date(request,date1):
+    list1 = Data2.objects.exclude(role='---').exclude(role='Absence').filter(date1=date1).values('role').annotate(rolecnt=Count('id')).order_by('role')
+    key={'date1':date1}
+
+    for x in list1:
+        role = x['role']
+        list2 = Data2.objects.exclude(role='---').exclude(role='Absence').filter(date1=date1,role=role)
+        names =''
+        for x2 in list2:
+            # print(x2.name)
+            names += "["+x2.name+"] "
+        x['names']= names
+    # pivot_table = pivot(list1, 'date1', 'member', 'id',aggregation=Count)
+    # for x in pivot_table:
+    #     x['total']=x['Member']+x['Guest']
+  
+    context = {'list1': list1,'key':key}
+    return render(request,getHtml('rolecnt_date') , context)
+
+
 
 def headcnt_date(request,date1):
     list1 = Data2.objects.exclude(role='---').exclude(role='Absence').filter(date1=date1).values('name','member').annotate(rolecnt=Count('id')).order_by('name')
@@ -50,7 +80,7 @@ def headcnt_date(request,date1):
         list2 = Data2.objects.exclude(role='---').exclude(role='Absence').filter(date1=date1,name=name)
         roles =''
         for x2 in list2:
-            print(x2.role)
+            # print(x2.role)
             roles += "["+x2.role+"] "
         x['roles']= roles
     # pivot_table = pivot(list1, 'date1', 'member', 'id',aggregation=Count)
