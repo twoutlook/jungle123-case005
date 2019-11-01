@@ -26,7 +26,7 @@ class Data2(models.Model):
     ]
 
     name = models.CharField(max_length=32)
-    member =  models.CharField(max_length=6)
+    member =  models.CharField( choices=MEMBER_CHOICES,max_length=6)
     date1 = models.DateField()
     role = models.CharField(  choices=ROLE_CHOICES,max_length=32)
     points = models.IntegerField(default=0)
