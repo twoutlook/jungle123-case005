@@ -8,13 +8,14 @@ from django.db import models
 
 class Data2(models.Model):
     ROLE_CHOICES = [
+        ('---', '---'),
         ('Ah-counter', 'Ah-counter'),
-        ('Attendance', 'Attendance'),
         ('GE', 'GE'),
-        ('Grammarian', 'SenGrammarianior'),
+        ('Grammarian', 'Grammarian'),
         ('IE', 'IE'),
         ('Speaker', 'Speaker'),
         ('TME', 'TME'),
+        ('TT Speaker', 'TT Speaker'),
         ('TT Evaluator', 'TT Evaluator'),
         ('TT-master', 'TT-master'),
         ('Timer', 'Timer'),
