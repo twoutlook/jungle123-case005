@@ -21,8 +21,9 @@ urlpatterns = [
     # path('', include('note.urls')), 
     # path('case001/', include('case001.urls')), 
     # path('hr001/', include('hr001.urls')), 
-    path('', include('portal.urls')), 
-    path('case005/', include('case005.urls')), 
+    path('', include('case005.urls')), 
+    # path('', include('portal.urls')), 
+    # path('case005/', include('case005.urls')), 
 
 ]
 # https://wsvincent.com/django-image-uploads/
