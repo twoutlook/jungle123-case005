@@ -1,6 +1,31 @@
 from django.db import models
 
 # Create your models here.
+
+
+class Attendance(models.Model):
+
+    # seq = models.IntegerField('序號',default=0)
+    date1 = models.DateField('日期')
+    name = models.CharField('姓名',max_length=20)
+    acct = models.CharField('帳號',max_length=50)
+    dept = models.CharField('門店',max_length=100)
+    type1 = models.CharField('打卡類型',max_length=10)
+    time1 = models.TimeField('打卡時間')
+    place = models.DateField('打卡地點')
+    
+    def __str__(self):
+        return self.name
+        
+    class Meta:
+        # ordering = ['dept19__code','sub19__code',]
+        unique_together = ('date1', 'acct','type1',)
+        verbose_name ="打卡基礎數據"
+        verbose_name_plural ="打卡基礎數據"
+
+
+
+
 class Empe(models.Model):
 
     seq = models.IntegerField('序號',default=0)

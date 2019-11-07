@@ -29,6 +29,7 @@ class Data2Resource(resources.ModelResource):
 class Data2Admin(ImportExportModelAdmin):
     resource_class = Data2Resource
     list_display = ('name', 'member','date1','role','points')
+    fields = ('name', 'member','role')
     list_filter = ['name','role','member']
     search_fields = ['date1']
    

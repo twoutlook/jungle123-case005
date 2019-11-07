@@ -6,6 +6,21 @@ from import_export.admin import ImportExportModelAdmin
 
 from .models import Empe
 from .models import Pay
+from .models import Attendance
+
+class AttendanceResource(resources.ModelResource):
+   class Meta:
+        model = Attendance
+class AttendanceAdmin(ImportExportModelAdmin):
+    # inlines = [PayInline]
+    resource_class = AttendanceResource
+    list_display = ('date1','name','acct','dept','type1','time1','place')
+    list_filter = ['name','dept','type1','place']
+    # list_filter = ['store','gender']
+    # ordering = ('id',)
+    # search_fields = ['name','mobile',]
+admin.site.register(Attendance, AttendanceAdmin)
+
 
 class PayInline(admin.TabularInline):
     model = Pay

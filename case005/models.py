@@ -1,5 +1,5 @@
 from django.db import models
-
+import datetime
 # class Data1(models.Model):
 #     date1 = models.DateField()
 #     place = models.CharField(max_length=100)
@@ -8,7 +8,7 @@ from django.db import models
 
 class Data2(models.Model):
     ROLE_CHOICES = [
-        ('---', '---'),
+        ('Attendance', 'Attendance'),
         ('Ah-counter', 'Ah-counter'),
         ('GE', 'GE'),
         ('Grammarian', 'Grammarian'),
@@ -27,9 +27,9 @@ class Data2(models.Model):
     ]
 
     name = models.CharField(max_length=32)
-    member =  models.CharField( choices=MEMBER_CHOICES,max_length=6)
-    date1 = models.DateField()
-    role = models.CharField(  choices=ROLE_CHOICES,max_length=32)
+    member =  models.CharField( 'Member or Guess',choices=MEMBER_CHOICES,max_length=6)
+    date1 = models.DateField('Meeting Date', default=datetime.date.today)
+    role = models.CharField( 'Meeting Role', choices=ROLE_CHOICES,max_length=32)
     points = models.IntegerField(default=0)
     class Meta:
         unique_together = ('name', 'date1','member','role')
