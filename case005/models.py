@@ -27,7 +27,7 @@ class Data2(models.Model):
     ]
 
     name = models.CharField(max_length=32)
-    member =  models.CharField( 'Member or Guess',choices=MEMBER_CHOICES,max_length=6)
+    member =  models.CharField( 'Member or Guest',choices=MEMBER_CHOICES,max_length=6)
     date1 = models.DateField('Meeting Date', default=datetime.date.today)
     role = models.CharField( 'Meeting Role', choices=ROLE_CHOICES,max_length=32)
     points = models.IntegerField(default=0)
