@@ -3,7 +3,7 @@ from django.db.models import Count, Sum, Max, Min
 import re
 from .models import Data2
 from .models import Best
-
+from django.shortcuts import redirect
 
 # https://pypi.org/project/django-pivot/
 from django_pivot.pivot import pivot
@@ -139,6 +139,50 @@ def best(request):
     context = {'list1': pivot_table}
     return render(request,getHtml('best'), context)
 
+# 2019-11-09, 仿 Djangogirls
+# django toastmasters
+#
+from .forms import MeetingForm
+
+def meeting_detail(request,pk):
+    meetings = Data2.objects.filter(pk=pk)
+    if meetings:
+        meeting= meetings[0]
+  
+    context = {'meeting': meeting}
+    return render(request,getHtml('meeting_detail'), context)
+
+def meeting_new(request):
+    # return render(request,getHtml('meeting_new'), context)
+    if request.method == "POST":
+        form = MeetingForm(request.POST)
+        if form.is_valid():
+            data2 = form.save(commit=False)
+            # post.author = request.user
+            # post.published_date = timezone.now()
+            data2.save()
+            return redirect('case005:meeting_detail', pk=data2.pk)
+    else:
+        form = MeetingForm()
+        # context = {'form': form}
+        # form = MeetingForm()
+    return render(request, getHtml('meeting_edit'),  {'form': form})
+
+
+def meeting_edit(request,pk):
+
+    meeting = get_object_or_404(meeting_edit, pk=pk)
+    if request.method == "POST":
+        form = MeetingForm(request.POST, instance=post)
+        if form.is_valid():
+            meeting = form.save(commit=False)
+            # post.author = request.user
+            # post.published_date = timezone.now()
+            meeting.save()
+            return redirect('post_detail', pk=meeting.pk)
+    else:
+        form = MeetingForm(instance=post)
+    return render(request, getHtml('meeting_edit'), {'form': form})
 
 def s4(request):
     list1 = Data2.objects.filter(role__in = ['Speaker','IE']).values('date1').annotate(cnt=Count('id')).order_by('date1')
